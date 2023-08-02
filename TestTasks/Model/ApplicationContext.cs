@@ -22,6 +22,8 @@ namespace TestTasks.Model
                     .OrderBy(x => x.Code)
                     .ToArray();
 
+            Data.RemoveRange(Data);
+
             Data.AddRange(converted);
 
             SaveChanges();
