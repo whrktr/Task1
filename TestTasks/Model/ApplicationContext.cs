@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace TestTasks.Model
 {
@@ -39,10 +40,9 @@ namespace TestTasks.Model
             {
                 data = data.Where(x => x.Code == code);
             }
-
             if(value != null) 
             {
-                data = data.Where(x => x.Value.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+                data = data.Where(x => EF.Functions.Like(x.Value, $"%{value}%"));
             }
 
             if (id != null)
